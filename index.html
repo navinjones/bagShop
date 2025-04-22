@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuyBags</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ffc107;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 0;
+        }
+        
+        .navbar-custom {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand img {
+            max-height: 50px;
+        }
+        
+        .hero-section {
+            background: url('/api/placeholder/1200/400') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .product-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            width: 60px;
+            background-color: var(--accent-color);
+            margin: 0 auto;
+        }
+        
+        footer {
+            background-color: #212529;
+            color: white;
+            padding: 40px 0;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <span><i class="fas fa-phone-alt me-2"></i> +91 9876543210</span>
+                <span class="ms-3"><i class="fas fa-envelope me-2"></i> info@buybags.com</span>
+            </div>
+            <div>
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Product</a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Backpacks</a></li>
+                          <li><a class="dropdown-item" href="#">Sling Bags</a></li>
+                          <li><a class="dropdown-item" href="#">Laptop Bags</a></li>
+                        </ul>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex ms-3">
+                    <a href="#" class="btn btn-outline-dark me-2"><i class="fas fa-search"></i></a>
+                    <a href="#" class="btn btn-outline-dark position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Carousel -->
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://bagsarctichunter.in/wp-content/uploads/2023/09/banner-travel-scaled-1500x691.jpg" class="d-block w-100" alt="Slide 1">
+          </div>
+          <div class="carousel-item">
+            <img src="https://bagsarctichunter.in/wp-content/uploads/2023/11/%E9%83%BD%E5%B8%82%E7%8C%8E%E4%BA%BA-%E6%A8%A1%E7%89%B9-1500x691.jpg" class="d-block w-100" alt="Slide 2">
+          </div>
+          <div class="carousel-item">
+            <img src="https://bagsarctichunter.in/wp-content/uploads/2023/09/banner-492-1500x691.jpg" class="d-block w-100" alt="Slide 3">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h4>Free Shipping</h4>
+                    <p>On all orders over ₹500</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h4>30 Days Return</h4>
+                    <p>Hassle-free returns</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h4>24/7 Support</h4>
+                    <p>Customer support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Featured Products</h2>
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-md-3">
+                    <div class="card product-card">
+                        <img src="./300.png" class="card-img-top" alt="Backpack">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Business Backpack</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                            </div>
+                            <p class="card-text">₹1499</p>
+                            <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="col-md-3">
+                    <div class="card product-card">
+                        <img src="./300.png" class="card-img-top" alt="Travel Bag">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Travel Backpack</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">₹4999</p>
+                            <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="col-md-3">
+                    <div class="card product-card">
+                        <img src="./300.png" class="card-img-top" alt="Laptop Bag">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Laptop Backpack</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">₹1999</p>
+                            <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="col-md-3">
+                    <div class="card product-card">
+                        <img src="./300.png" class="card-img-top" alt="Casual Backpack">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Casual Backpack</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">₹899</p>
+                            <a href="#" class="btn btn-outline-dark">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>New Collection 2025</h2>
+                    <p class="lead">Discover our latest range of premium quality backpacks designed for your everyday adventures.</p>
+                    <p>Made with durable materials and thoughtful designs, our bags are perfect for work, travel, or daily use.</p>
+                    <a href="#" class="btn btn-primary">Explore Collection</a>
+                </div>
+                <div class="col-md-6">
+                    <img src="./600x400.png" alt="New Collection" class="img-fluid rounded">
+                </div>
+            </div>
+        </div>  
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center section-title">Shop by Category</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="./400x300.png" class="card-img" alt="Backpacks">
+                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                            <div class="text-center bg-white p-3">
+                                <h3>Backpacks</h3>
+                                <a href="#" class="btn btn-outline-dark">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="./400x300.png" class="card-img" alt="Travel Bags">
+                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                            <div class="text-center bg-white p-3">
+                                <h3>Travel Bags</h3>
+                                <a href="#" class="btn btn-outline-dark">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="./400x300.png" class="card-img" alt="Laptop Bags">
+                        <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                            <div class="text-center bg-white p-3">
+                                <h3>Laptop Bags</h3>
+                                <a href="#" class="btn btn-outline-dark">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center section-title">What Our Customers Say</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">"I've been using my Arctic Hunter backpack for over a year now. The quality is exceptional and it still looks like new!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <img src="/api/placeholder/50/50" class="rounded-circle me-3" alt="Customer">
+                                <div>
+                                    <h6 class="mb-0">John Smith</h6>
+                                    <small class="text-muted">New York, USA</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                            </div>
+                            <p class="card-text">"Perfect for my daily commute. Fits my laptop, lunch, and gym clothes with room to spare. Highly recommend!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <img src="/api/placeholder/50/50" class="rounded-circle me-3" alt="Customer">
+                                <div>
+                                    <h6 class="mb-0">Mary Johnson</h6>
+                                    <small class="text-muted">London, UK</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-3 h-100">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                            </div>
+                            <p class="card-text">"Great quality and stylish design. The water-resistant feature saved my laptop during a sudden rain. Worth every penny!"</p>
+                            <div class="d-flex align-items-center mt-3">
+                                <img src="/api/placeholder/50/50" class="rounded-circle me-3" alt="Customer">
+                                <div>
+                                    <h6 class="mb-0">David Chen</h6>
+                                    <small class="text-muted">Sydney, Australia</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Get the latest updates on new products and special promotions.</p>
+                </div>
+                <div class="col-md-6">
+                    <form class="row g-3">
+                        <div class="col-md-8">
+                            <input type="email" class="form-control" placeholder="Your email address">
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-light w-100">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>About BuyBags</h5>
+                    <p>We are dedicated to providing high-quality, stylish, and functional bags for all your needs. Our mission is to combine fashion with practicality.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Shop</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">All Products</a></li>
+                        <li><a href="#" class="text-white">Backpacks</a></li>
+                        <li><a href="#" class="text-white">Travel Bags</a></li>
+                        <li><a href="#" class="text-white">Accessories</a></li>
+                        <li><a href="#" class="text-white">New Arrivals</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Information</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-white">FAQ</a></li>
+                        <li><a href="#" class="text-white">Blog</a></li>
+                        <li><a href="#" class="text-white">Store Locator</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Main Street, City, Country</p>
+                        <p><i class="fas fa-phone-alt me-2"></i> +91 9876543210</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@buybags.com</p>
+                    </address>
+                </div>
+            </div>
+            <hr class="bg-secondary">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2025 BuyBags All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <img src="/api/placeholder/250/30" alt="Payment Methods" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
