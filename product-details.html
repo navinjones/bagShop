@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #004dc1;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --border-color: #e5e5e5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Header Styles */
+        .top-bar {
+            background-color: #333;
+            color: white;
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .navbar {
+            padding: 15px 0;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 10px 15px !important;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .dropdown-menu {
+            border-radius: 0;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-inquire {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 0;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        
+        .btn-inquire:hover {
+            background-color: #00c8ff;
+            color: white;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb-section {
+            padding: 15px 0;
+            background-color: #f0f0f0;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 0;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--primary-color);
+        }
+        
+        /* Product Details Section */
+        .product-details-section {
+            padding: 60px 0;
+        }
+        
+        .product-gallery {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .main-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            font-weight: 500;
+            z-index: 1;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .thumbnail:hover, .thumbnail.active {
+            border-color: var(--primary-color);
+        }
+        
+        .product-info h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .product-category {
+            color: #666;
+            margin-bottom: 15px;
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .product-description {
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .product-meta {
+            margin-bottom: 30px;
+        }
+        
+        .product-meta-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-meta-icon {
+            width: 30px;
+            color: var(--primary-color);
+        }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: 1px solid #f0f0f0;
+            text-align: center;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .btn-addtocart {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+        
+        .btn-addtocart:hover {
+            background-color: #00c8ff;
+        }
+        
+        .btn-wishlist {
+            width: 50px;
+            height: 50px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-wishlist:hover {
+            background-color: #e1e1e1;
+        }
+        
+        .product-share {
+            display: flex;
+            align-items: center;
+        }
+        
+        .share-label {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+        
+        .share-links {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .share-link {
+            width: 35px;
+            height: 35px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .share-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Product Tabs */
+        .product-tabs {
+            margin-top: 60px;
+        }
+        
+        .nav-tabs {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: #666;
+            border: none;
+            font-weight: 600;
+            padding: 15px 20px;
+            position: relative;
+        }
+        
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+        
+        .nav-tabs .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            padding: 20px 0;
+        }
+        
+        .tab-pane h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .specifications-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .specifications-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .specifications-item:last-child {
+            border-bottom: none;
+        }
+        
+        .specifications-label {
+            width: 150px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .specifications-value {
+            flex: 1;
+            color: #666;
+        }
+        
+        /* Related Products */
+        .related-products {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            border: 1px solid #f0f0f0;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .product-category-small {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .product-price-small {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .btn-product {
+            background-color: transparent;
+            color: var(--dark-color);
+            border: 1px solid var(--dark-color);
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-product:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .product-info h1 {
+                font-size: 1.8rem;
+            }
+            
+            .product-price {
+                font-size: 1.5rem;
+            }
+            
+            .main-image {
+                height: 350px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-info h1 {
+                font-size: 1.5rem;
+            }
+            
+            .product-price {
+                font-size: 1.3rem;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .nav-tabs .nav-link {
+                padding: 10px 15px;
+            }
+            
+            .specifications-label {
+                width: 120px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .product-info h1 {
+                font-size: 1.3rem;
+            }
+            
+            .product-price {
+                font-size: 1.2rem;
+            }
+            
+            .main-image {
+                height: 250px;
+            }
+            
+            .thumbnail {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .quantity-selector {
+                flex-wrap: wrap;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .btn-wishlist {
+                width: 100%;
+                height: 40px;
+            }
+            
+            .specifications-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .specifications-label {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-bar-left">
+                <span>Email: sales@nxtoasis.com</span>
+                <span class="ms-3">WhatsApp: +91-9876543210</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="https://via.placeholder.com/120x40?text=Arctic+Hunter" alt="NxtOasis Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="new-release.html">New Release</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Product
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                                <li><a class="dropdown-item" href="products.html?category=business">Business Backpack</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=travel">Travel Backpack</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=sport">Sport Casual Backpack</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=sling">Men's Sling Bag</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=waist">Waist Bag</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=laptop">Laptop Messenger Bag</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="video-gallery.html">Video Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="partners.html">Partners</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="ms-3 d-flex align-items-center">
+                    
+                        <a href="inquire.html" class="btn btn-inquire">Inquire</a>
+                        <a href="#" class="ms-3 text-dark"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb" id="product-breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                    <li class="breadcrumb-item"><a href="#" id="category-breadcrumb">Category</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" id="product-name-breadcrumb">Product Name</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Product Details Section -->
+    <section class="product-details-section">
+        <div class="container">
+            <div class="row">
+                <!-- Product Gallery -->
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="product-gallery">
+                        <div id="product-badge"></div>
+                        <div class="main-image-container">
+                            <img src="https://via.placeholder.com/500x500?text=Product+Image" alt="Product Image" class="main-image" id="main-product-image">
+                        </div>
+                        <div class="thumbnail-container" id="product-thumbnails">
+                            <!-- Thumbnails will be loaded dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <h1 id="product-name">Product Name</h1>
+                        <div class="product-category" id="product-category">Category</div>
+                        <div class="product-price" id="product-price">$0.00</div>
+                        <div class="product-description" id="product-description">
+                            Product description will be loaded dynamically.
+                        </div>
+                        <div class="product-meta">
+                            <div class="product-meta-item" id="product-color">
+                                <div class="product-meta-icon"><i class="fas fa-palette"></i></div>
+                                <div class="product-meta-text">Color: <strong>Black</strong></div>
+                            </div>
+                            <div class="product-meta-item" id="product-capacity">
+                                <div class="product-meta-icon"><i class="fas fa-box"></i></div>
+                                <div class="product-meta-text">Capacity: <strong>20 L</strong></div>
+                            </div>
+                            <div class="product-meta-item" id="product-laptop-size">
+                                <div class="product-meta-icon"><i class="fas fa-laptop"></i></div>
+                                <div class="product-meta-text">Laptop Size: <strong>15.6"</strong></div>
+                            </div>
+                            <div class="product-meta-item" id="product-key-feature">
+                                <div class="product-meta-icon"><i class="fas fa-star"></i></div>
+                                <div class="product-meta-text">Key Feature: <strong>USB Charging Port</strong></div>
+                            </div>
+                            <div class="product-meta-item">
+                                <div class="product-meta-icon"><i class="fas fa-check-circle"></i></div>
+                                <div class="product-meta-text">Availability: <strong id="product-availability">In Stock</strong></div>
+                            </div>
+                        </div>
+                        <div class="quantity-selector">
+                            <button class="quantity-btn minus-btn"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="quantity-input" value="1" min="1" max="10">
+                            <button class="quantity-btn plus-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-addtocart"><i class="fas fa-shopping-cart me-2"></i> Add to Cart</button>
+                            <button class="btn-wishlist"><i class="far fa-heart"></i></button>
+                        </div>
+                        <div class="product-share">
+                            <span class="share-label">Share:</span>
+                            <div class="share-links">
+                                <a href="#" class="share-link"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="share-link"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="share-link"><i class="fab fa-pinterest"></i></a>
+                                <a href="#" class="share-link"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Tabs -->
+            <div class="product-tabs">
+                <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="specifications-tab" data-bs-toggle="tab" data-bs-target="#specifications" type="button" role="tab" aria-controls="specifications" aria-selected="false">Specifications</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="features-tab" data-bs-toggle="tab" data-bs-target="#features" type="button" role="tab" aria-controls="features" aria-selected="false">Features</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="productTabsContent">
+                    <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+                        <p id="description-content">
+                            Product description will be loaded dynamically.
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="specifications" role="tabpanel" aria-labelledby="specifications-tab">
+                        <h3>Product Specifications</h3>
+                        <ul class="specifications-list" id="specifications-list">
+                            <!-- Specifications will be loaded dynamically -->
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="features" role="tabpanel" aria-labelledby="features-tab">
+                        <h3>Key Features</h3>
+                        <ul class="features-list" id="features-list">
+                            <!-- Features will be loaded dynamically -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="related-products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Related Products</h2>
+                <p>You might also like these products from the same category</p>
+            </div>
+            <div class="row" id="related-products-container">
+                <!-- Related products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-logo">
+                        <img src="https://via.placeholder.com/120x40?text=Arctic+Hunter" alt="NxtOasis Logo">
+                    </div>
+                    <p>Founded in 2009, NxtOasis has grown to become a leading brand in the bags industry, offering premium, durable products for modern consumers.</p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>QUICK LINKS</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="new-release.html">New Release</a></li>
+                            <li><a href="products.html">Product</a></li>
+                            <!-- <li><a href="video-gallery.html">Video Gallery</a></li>
+                            <li><a href="partners.html">Partners</a></li> -->
+                            <li><a href="about.html">About us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>PRODUCTS</h5>
+                        <ul>
+                            <li><a href="products.html?category=business">Business Backpack</a></li>
+                            <li><a href="products.html?category=travel">Travel Backpack</a></li>
+                            <li><a href="products.html?category=sport">Sport Casual Backpack</a></li>
+                            <li><a href="products.html?category=sling">Men's Sling Bag</a></li>
+                            <li><a href="products.html?category=waist">Waist Bag</a></li>
+                            <li><a href="products.html?category=laptop">Laptop Messenger Bag</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>BRAND SOCIAL</h5>
+                        <div class="d-flex gap-3 mb-3">
+                            <a href="#" class="text-white"><i class="fab fa-facebook-f fa-2x"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 NxtOasis Bags | Privacy Policy | Terms and Conditions</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get product ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            // If no product ID is provided, redirect to products page
+            if (!productId) {
+                window.location.href = 'products.html';
+                return;
+            }
+            
+            // Get product from database
+            const product = getProductById(productId);
+            
+            // If product doesn't exist, redirect to products page
+            if (!product) {
+                window.location.href = 'products.html';
+                return;
+            }
+            
+            // Get category information
+            const category = getCategoryById(product.category);
+            
+            // Update page title
+            document.title = `${product.name} - NxtOasis`;
+            
+            // Update breadcrumb
+            document.getElementById('category-breadcrumb').textContent = category.name;
+            document.getElementById('category-breadcrumb').href = `products.html?category=${category.id}`;
+            document.getElementById('product-name-breadcrumb').textContent = product.name;
+            
+            // Update product information
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-category').textContent = category.name;
+            document.getElementById('product-price').textContent = formatPrice(product.price);
+            document.getElementById('product-description').textContent = product.description;
+            document.getElementById('description-content').textContent = product.description;
+            
+            // Update product meta
+            document.querySelector('#product-color .product-meta-text').innerHTML = `Color: <strong>${product.color}</strong>`;
+            document.querySelector('#product-capacity .product-meta-text').innerHTML = `Capacity: <strong>${product.capacity}</strong>`;
+            
+            // Check if laptop size exists
+            if (product.laptop) {
+                document.querySelector('#product-laptop-size .product-meta-text').innerHTML = `Laptop Size: <strong>${product.laptop}</strong>`;
+            } else {
+                document.getElementById('product-laptop-size').style.display = 'none';
+            }
+            
+            // Update key feature
+            document.querySelector('#product-key-feature .product-meta-text').innerHTML = `Key Feature: <strong>${product.keyFeature}</strong>`;
+            
+            // Update availability
+            document.getElementById('product-availability').textContent = product.inStock ? 'In Stock' : 'Out of Stock';
+            document.getElementById('product-availability').style.color = product.inStock ? '#28a745' : '#dc3545';
+            
+            // Add NEW badge if product is new
+            if (product.isNew) {
+                const badge = document.createElement('span');
+                badge.className = 'product-badge';
+                badge.textContent = 'NEW';
+                document.getElementById('product-badge').appendChild(badge);
+            }
+            
+            // Update main product image
+            document.getElementById('main-product-image').src = product.image;
+            document.getElementById('main-product-image').alt = product.name;
+            
+            // Load product thumbnails
+            const thumbnailsContainer = document.getElementById('product-thumbnails');
+            thumbnailsContainer.innerHTML = '';
+            
+            // Add main image as first thumbnail
+            const mainThumbnail = document.createElement('img');
+            mainThumbnail.src = product.image;
+            mainThumbnail.alt = product.name;
+            mainThumbnail.className = 'thumbnail active';
+            mainThumbnail.addEventListener('click', function() {
+                updateMainImage(product.image);
+                setActiveThumbnail(this);
+            });
+            thumbnailsContainer.appendChild(mainThumbnail);
+            
+            // Add other images as thumbnails
+            if (product.images && product.images.length > 0) {
+                product.images.forEach(image => {
+                    const thumbnail = document.createElement('img');
+                    thumbnail.src = image;
+                    thumbnail.alt = `${product.name} - Additional Image`;
+                    thumbnail.className = 'thumbnail';
+                    thumbnail.addEventListener('click', function() {
+                        updateMainImage(image);
+                        setActiveThumbnail(this);
+                    });
+                    thumbnailsContainer.appendChild(thumbnail);
+                });
+            }
+            
+            // Load product specifications
+            const specificationsList = document.getElementById('specifications-list');
+            specificationsList.innerHTML = '';
+            
+            // Add specifications
+            const specifications = [
+                { label: 'Product ID', value: product.id },
+                { label: 'Category', value: category.name },
+                { label: 'Color', value: product.color },
+                { label: 'Capacity', value: product.capacity }
+            ];
+            
+            // Add laptop size if exists
+            if (product.laptop) {
+                specifications.push({ label: 'Laptop Size', value: product.laptop });
+            }
+            
+            // Add tablet size if exists
+            if (product.tablet) {
+                specifications.push({ label: 'Tablet Size', value: product.tablet });
+            }
+            
+            // Add key feature
+            specifications.push({ label: 'Key Feature', value: product.keyFeature });
+            
+            // Add availability
+            specifications.push({ label: 'Availability', value: product.inStock ? 'In Stock' : 'Out of Stock' });
+            
+            // Render specifications
+            specifications.forEach(spec => {
+                const specItem = document.createElement('li');
+                specItem.className = 'specifications-item';
+                specItem.innerHTML = `
+                    <div class="specifications-label">${spec.label}</div>
+                    <div class="specifications-value">${spec.value}</div>
+                `;
+                specificationsList.appendChild(specItem);
+            });
+            
+            // Load product features
+            const featuresList = document.getElementById('features-list');
+            featuresList.innerHTML = '';
+            
+            // Add features (using key feature as main feature and adding some generic features)
+            const features = [
+                product.keyFeature,
+                'Water-resistant exterior',
+                'Durable and lightweight material',
+                'Multiple compartments for organization',
+                'Comfortable padded shoulder straps',
+                'Quality zippers and hardware'
+            ];
+            
+            // Render features
+            features.forEach(feature => {
+                const featureItem = document.createElement('li');
+                featureItem.className = 'mb-3';
+                featureItem.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <div>${feature}</div>
+                    </div>
+                `;
+                featuresList.appendChild(featureItem);
+            });
+            
+            // Load related products
+            loadRelatedProducts(product.category, product.id);
+            
+            // Quantity selector functionality
+            const minusBtn = document.querySelector('.minus-btn');
+            const plusBtn = document.querySelector('.plus-btn');
+            const quantityInput = document.querySelector('.quantity-input');
+            
+            minusBtn.addEventListener('click', function() {
+                let quantity = parseInt(quantityInput.value);
+                if (quantity > 1) {
+                    quantityInput.value = quantity - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', function() {
+                let quantity = parseInt(quantityInput.value);
+                if (quantity < 10) {
+                    quantityInput.value = quantity + 1;
+                }
+            });
+            
+            // Wishlist button functionality
+            const wishlistBtn = document.querySelector('.btn-wishlist');
+            wishlistBtn.addEventListener('click', function() {
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    this.innerHTML = '<i class="fas fa-heart"></i>';
+                    this.style.backgroundColor = '#ffe6e0';
+                    this.style.color = let(--primary-color);
+                } else {
+                    this.innerHTML = '<i class="far fa-heart"></i>';
+                    this.style.backgroundColor = '#f0f0f0';
+                    this.style.color = '#333';
+                }
+            });
+        });
+        
+        // Function to update main image
+        function updateMainImage(imageUrl) {
+            const mainImage = document.getElementById('main-product-image');
+            mainImage.src = imageUrl;
+        }
+        
+        // Function to set active thumbnail
+        function setActiveThumbnail(thumbnail) {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+        
+        // Function to load related products
+        function loadRelatedProducts(categoryId, currentProductId) {
+            const container = document.getElementById('related-products-container');
+            container.innerHTML = '';
+            
+            // Get products from the same category
+            const categoryProducts = getProductsByCategory(categoryId);
+            
+            // Filter out the current product
+            const relatedProducts = categoryProducts.filter(product => product.id !== currentProductId);
+            
+            // Display up to 4 related products
+            const productsToShow = relatedProducts.slice(0, 4);
+            
+            // Render related products
+            productsToShow.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'col-lg-3 col-md-6 mb-4';
+                productElement.innerHTML = `
+                    <div class="product-card">
+                        <a href="product-details.html?id=${product.id}">
+                            <img src="${product.image}" alt="${product.name}" class="product-img">
+                        </a>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-category-small">${getCategoryById(product.category).name}</p>
+                        <div class="product-price-small">${formatPrice(product.price)}</div>
+                        <a href="product-details.html?id=${product.id}" class="btn btn-product">View Details</a>
+                    </div>
+                `;
+                container.appendChild(productElement);
+            });
+        }
+    </script>
+</body>
+</html>

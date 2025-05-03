@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Releases - NxtOasis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #004dc1;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --border-color: #e5e5e5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Header Styles */
+        .top-bar {
+            background-color: #333;
+            color: white;
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .navbar {
+            padding: 15px 0;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 10px 15px !important;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .dropdown-menu {
+            border-radius: 0;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-inquire {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 0;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        
+        .btn-inquire:hover {
+            background-color: #00c8ff;
+            color: white;
+        }
+        
+        /* Banner Section */
+        .page-banner {
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .page-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        /* New Release Section */
+        .new-release-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: transparent;
+            color: var(--dark-color);
+            border: 1px solid #ddd;
+            padding: 8px 20px;
+            margin: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .product-card {
+            border: 1px solid #f0f0f0;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .product-category {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .btn-product {
+            background-color: transparent;
+            color: var(--dark-color);
+            border: 1px solid var(--dark-color);
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-product:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        /* Featured Collection */
+        .featured-collection {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            height: 300px;
+        }
+        
+        .collection-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .collection-card:hover .collection-img {
+            transform: scale(1.1);
+        }
+        
+        .collection-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .collection-card:hover .collection-content {
+            background: linear-gradient(to top, #00c8ff, rgba(255, 87, 34, 0));
+        }
+        
+        .collection-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .collection-desc {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .btn-collection {
+            background-color: white;
+            color: var(--dark-color);
+            padding: 5px 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-collection:hover {
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            padding: 60px 0;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .newsletter-content h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-content p {
+            margin-bottom: 0;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+        }
+        
+        .btn-newsletter {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 12px 25px;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-newsletter:hover {
+            background-color: #222;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .newsletter-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-banner {
+                height: 250px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                margin-bottom: 15px;
+            }
+            
+            .btn-newsletter {
+                width: 100%;
+            }
+            
+            .collection-card {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-banner {
+                height: 200px;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 80%;
+                margin-bottom: 10px;
+            }
+            
+            .collection-card {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-bar-left">
+                <span>Email: sales@nxtoasis.com</span>
+                <span class="ms-3">WhatsApp: +91-9876543210</span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white me-3"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./imgs/logo.jpeg" alt="NxtOasis Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="new-release.html">New Release</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Product
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="productDropdown">
+                                <li><a class="dropdown-item" href="products.html?category=business">Business Backpack</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=travel">Travel Backpack</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=sport">Sport Casual Backpack</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=sling">Men's Sling Bag</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=waist">Waist Bag</a></li>
+                                <li><a class="dropdown-item" href="products.html?category=laptop">Laptop Messenger Bag</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="video-gallery.html">Video Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="partners.html">Partners</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="ms-3 d-flex align-items-center">
+                        <a href="inquire.html" class="btn btn-inquire">Inquire</a>
+                        <a href="#" class="ms-3 text-dark"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" style="background-image: url('./imgs/new-release.jpeg');">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1 class="page-title">New Releases</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-white">Home</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">New Releases</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Release Section -->
+    <section class="new-release-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Arrivals</h2>
+                <p>Discover our newest products designed for the modern lifestyle</p>
+            </div>
+            
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Categories</button>
+                <button class="filter-btn" data-filter="business">Business</button>
+                <button class="filter-btn" data-filter="travel">Travel</button>
+                <button class="filter-btn" data-filter="sport">Sport</button>
+                <button class="filter-btn" data-filter="sling">Sling Bags</button>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="row" id="new-releases-container">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="featured-collection">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Collections</h2>
+                <p>Our specially curated collections for various lifestyles</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="collection-card">
+                        <img src="./imgs/bussbag.jpeg" alt="Business Collection" class="collection-img">
+                        <div class="collection-content">
+                            <h3 class="collection-title">Business Collection</h3>
+                            <p class="collection-desc">Professional bags designed for the modern workplace</p>
+                            <a href="products.html?category=business" class="btn btn-collection">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="collection-card">
+                        <img src="./imgs/travel.jpeg" alt="Travel Collection" class="collection-img">
+                        <div class="collection-content">
+                            <h3 class="collection-title">Travel Collection</h3>
+                            <p class="collection-desc">Durable companions for all your adventures</p>
+                            <a href="products.html?category=travel" class="btn btn-collection">Explore</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="collection-card">
+                        <img src="./imgs/casual.webp" alt="Urban Collection" class="collection-img">
+                        <div class="collection-content">
+                            <h3 class="collection-title">Urban Collection</h3>
+                            <p class="collection-desc">Stylish bags for the city lifestyle</p>
+                            <a href="products.html?category=sling" class="btn btn-collection">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="newsletter-content">
+                        <h2>Be the First to Know</h2>
+                        <p>Subscribe to our newsletter to get updates on new products, promotions, and more.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                        <button type="submit" class="btn-newsletter">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-logo">
+                        <img src="https://via.placeholder.com/120x40?text=Arctic+Hunter" alt="NxtOasis Logo">
+                    </div>
+                    <p>Founded in 2009, NxtOasis has grown to become a leading brand in the bags industry, offering premium, durable products for modern consumers.</p>
+                    <div class="social-links mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>QUICK LINKS</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="new-release.html">New Release</a></li>
+                            <li><a href="products.html">Product</a></li>
+                            <!-- <li><a href="video-gallery.html">Video Gallery</a></li>
+                            <li><a href="partners.html">Partners</a></li> -->
+                            <li><a href="about.html">About us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>PRODUCTS</h5>
+                        <ul>
+                            <li><a href="products.html?category=business">Business Backpack</a></li>
+                            <li><a href="products.html?category=travel">Travel Backpack</a></li>
+                            <li><a href="products.html?category=sport">Sport Casual Backpack</a></li>
+                            <li><a href="products.html?category=sling">Men's Sling Bag</a></li>
+                            <li><a href="products.html?category=waist">Waist Bag</a></li>
+                            <li><a href="products.html?category=laptop">Laptop Messenger Bag</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>BRAND SOCIAL</h5>
+                        <div class="d-flex gap-3 mb-3">
+                            <a href="#" class="text-white"><i class="fab fa-facebook-f fa-2x"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 NxtOasis Bags | Privacy Policy | Terms and Conditions</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM Elements
+            const newReleasesContainer = document.getElementById('new-releases-container');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Load new releases
+            function loadNewReleases(filterCategory = 'all') {
+                // Get new releases from database
+                let newProducts = getNewReleases();
+                
+                // Apply filter if not "all"
+                if (filterCategory !== 'all') {
+                    newProducts = newProducts.filter(product => product.category === filterCategory);
+                }
+                
+                // Clear container
+                newReleasesContainer.innerHTML = '';
+                
+                // Check if there are products after filtering
+                if (newProducts.length === 0) {
+                    newReleasesContainer.innerHTML = `
+                        <div class="col-12 text-center">
+                            <p>No new products found in this category. Check back soon!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Render products
+                newProducts.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.className = 'col-lg-4 col-md-6 mb-4';
+                    productElement.innerHTML = `
+                        <div class="product-card position-relative">
+                            <span class="product-badge">NEW</span>
+                            <a href="product-details.html?id=${product.id}">
+                                <img src="${product.image}" alt="${product.name}" class="product-img">
+                            </a>
+                            <h3 class="product-title">${product.name}</h3>
+                            <p class="product-category">${getCategoryById(product.category).name}</p>
+                            <div class="product-price">${formatPrice(product.price)}</div>
+                            <div class="product-features mb-3">
+                                <small><strong>Key Feature:</strong> ${product.keyFeature}</small>
+                            </div>
+                            <a href="product-details.html?id=${product.id}" class="btn btn-product">View Details</a>
+                        </div>
+                    `;
+                    newReleasesContainer.appendChild(productElement);
+                });
+            }
+            
+            // Filter button click event
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Load filtered products
+                    loadNewReleases(filterValue);
+                });
+            });
+            
+            // Initialize the page
+            loadNewReleases();
+        });
+    </script>
+</body>
+</html>

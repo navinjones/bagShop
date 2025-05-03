@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - NxtOasis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #004dc1;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --border-color: #e5e5e5;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Header Styles */
+        .top-bar {
+            background-color: #333;
+            color: white;
+            padding: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .navbar {
+            padding: 15px 0;
+        }
+        
+        .navbar-brand img {
+            height: 40px;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 10px 15px !important;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        .dropdown-menu {
+            border-radius: 0;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-inquire {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 0;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+        
+        .btn-inquire:hover {
+            background-color: #00c8ff;
+            color: white;
+        }
+        
+        /* Banner Section */
+        .page-banner {
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+        
+        .page-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .page-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            padding: 60px 0;
+        }
+        
+        .filter-sidebar {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 30px;
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .filter-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        
+        .filter-group-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-item {
+            margin-bottom: 10px;
+        }
+        
+        .category-link {
+            color: #666;
+            text-decoration: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .category-link:hover, .category-link.active {
+            color: var(--primary-color);
+        }
+        
+        .category-count {
+            background-color: #f0f0f0;
+            color: #666;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-link:hover .category-count, .category-link.active .category-count {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .price-filter {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .price-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        
+        .price-slider {
+            margin-bottom: 15px;
+        }
+        
+        .price-slider-input {
+            width: 100%;
+        }
+        
+        .btn-filter {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-filter:hover {
+            background-color: #00c8ff;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-item {
+            margin-bottom: 10px;
+        }
+        
+        .feature-checkbox {
+            margin-right: 10px;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .products-count {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .products-count span {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .sort-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        .sort-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            color: #333;
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .view-btn {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #666;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn:hover, .view-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .product-card {
+            border: 1px solid #f0f0f0;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+        
+        .product-img {
+            display: block;
+            margin: 0 auto 20px;
+            height: 200px;
+            object-fit: contain;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .product-meta {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .product-category {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .product-feature {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-view {
+            background-color: transparent;
+            color: var(--dark-color);
+            border: 1px solid var(--dark-color);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-view:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .btn-wishlist {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #666;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-wishlist:hover {
+            background-color: #e0f0ff;
+            color: var(--primary-color);
+        }
+        
+        .btn-wishlist.active {
+            background-color: #e0f0ff;
+            color: #004dc1;
+        }
+        
+        .product-list-item {
+            display: flex;
+            border: 1px solid #f0f0f0;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .product-list-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-list-img-container {
+            width: 200px;
+            padding-right: 20px;
+        }
+        
+        .product-list-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+        }
+        
+        .product-list-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-list-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .product-list-category {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-list-description {
+            color: #666;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+        
+        .product-list-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .product-list-feature {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .product-list-feature i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .product-list-price {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .product-list-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .page-item {
+            margin: 0 5px;
+        }
+        
+        .page-link {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover, .page-item.active .page-link {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            background-color: #f0f0f0;
+            color: #999;
+            cursor: not-allowed;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo img {
+            height: 60px;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .sort-options {
+                margin-top: 15px;
+            }
+            
+            .product-list-img-container {
+                width: 150px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-banner {
+                height: 250px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .product-list-item {
+                flex-direction: column;
+            }
+            
+            .product-list-img-container {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .sort-options {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-banner {
+                height: 200px;
+            }
+            
+            .page-title {
+                font-size: 1.5rem;
+            }
+            
+            .products-count {
+                margin-bottom: 10px;
+            }
+            
+            .product-card {
+                padding: 15px;
+            }
+            
+            .product-img {
+                height: 150px;
+            }
+            
+            .product-list-actions {
+                flex-direction: column;
+            }
+            
+            .btn-view {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .btn-wishlist {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-bar-left">
+                <span>Email: <span id="sales-email"></span></span>
+                <span class="ms-3">WhatsApp: <span id="whatsapp-number"></span></span>
+            </div>
+            <div class="top-bar-right">
+                <a href="#" id="topbar-facebook" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" id="topbar-youtube" class="text-white me-3"><i class="fab fa-youtube"></i></a>
+                <a href="#" id="topbar-instagram" class="text-white"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="./imgs/logo.jpeg" alt="NxtOasis Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="new-release.html">New Release</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" href="#" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Product
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="productDropdown" id="product-dropdown-menu">
+                                <!-- Categories will be dynamically loaded here -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="ms-3 d-flex align-items-center">
+                        <a href="inquire.html" class="btn btn-inquire">Inquire</a>
+                        <a href="#" class="ms-3 text-dark" id="search-button"><i class="fas fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner" id="category-banner" style="background-image: url('./imgs/s2.jpeg');">
+        <div class="container">
+            <div class="page-banner-content">
+                <h1 class="page-title" id="category-title">Products</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-white">Home</a></li>
+                        <li class="breadcrumb-item"><a href="products.html" class="text-white">Products</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page" id="breadcrumb-category">All Products</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-lg-3">
+                    <!-- Categories Filter -->
+                    <div class="filter-sidebar">
+                        <h3 class="filter-title">Categories</h3>
+                        <ul class="category-list" id="categories-list">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Price Filter -->
+                    <div class="filter-sidebar">
+                        <h3 class="filter-title">Filter by Price</h3>
+                        <div class="price-filter">
+                            <div class="price-range">
+                                <input type="number" class="price-input" id="min-price" placeholder="Min" min="0">
+                                <span>-</span>
+                                <input type="number" class="price-input" id="max-price" placeholder="Max" min="0">
+                            </div>
+                            <div class="price-slider">
+                                <input type="range" class="price-slider-input" id="price-slider" min="0" max="10000" value="10000">
+                            </div>
+                            <button class="btn-filter" id="apply-price-filter">Apply Filter</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Features Filter -->
+                    <div class="filter-sidebar">
+                        <h3 class="filter-title">Key Features</h3>
+                        <ul class="feature-list" id="feature-list">
+                            <!-- Features will be loaded dynamically -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="col-lg-9">
+                    <div class="products-header">
+                        <div class="products-count">
+                            Showing <span id="products-showing">1-12</span> of <span id="products-total">24</span> products
+                        </div>
+                        <div class="sort-options">
+                            <label for="sort-select" class="sort-label">Sort by:</label>
+                            <select id="sort-select" class="sort-select">
+                                <option value="featured">Featured</option>
+                                <option value="newest">Newest</option>
+                                <option value="price-low-high">Price: Low to High</option>
+                                <option value="price-high-low">Price: High to Low</option>
+                                <option value="name-a-z">Name: A to Z</option>
+                                <option value="name-z-a">Name: Z to A</option>
+                            </select>
+                            <div class="view-options">
+                                <button class="view-btn active" id="grid-view" title="Grid View">
+                                    <i class="fas fa-th"></i>
+                                </button>
+                                <button class="view-btn" id="list-view" title="List View">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Products Container -->
+                    <div class="row" id="products-container">
+                        <!-- Products will be loaded dynamically -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Products pagination">
+                        <ul class="pagination" id="pagination">
+                            <!-- Pagination will be generated dynamically -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-logo">
+                        <img src="./imgs/logo.jpeg" alt="NxtOasis Logo">
+                    </div>
+                    <p id="company-short-description"></p>
+                    <div class="social-links mt-4">
+                        <a href="#" id="facebook-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" id="instagram-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="youtube-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>QUICK LINKS</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="new-release.html">New Release</a></li>
+                            <li><a href="products.html">Product</a></li>
+                            <li><a href="about.html">About us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>PRODUCTS</h5>
+                        <ul id="footer-categories">
+                            <!-- Categories will be loaded dynamically -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 mb-4">
+                    <div class="footer-links">
+                        <h5>BRAND SOCIAL</h5>
+                        <div class="d-flex gap-3 mb-3">
+                            <a href="#" class="text-white" id="footer-facebook"><i class="fab fa-facebook-f fa-2x"></i></a>
+                            <a href="#" class="text-white" id="footer-instagram"><i class="fab fa-instagram fa-2x"></i></a>
+                            <a href="#" class="text-white" id="footer-youtube"><i class="fab fa-youtube fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 NxtOasis Bags | Privacy Policy | Terms and Conditions</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Database JS -->
+    <script src="database.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // State Variables
+            let currentCategory = new URLSearchParams(window.location.search).get('category') || 'all';
+            let currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
+            let currentSort = new URLSearchParams(window.location.search).get('sort') || 'featured';
+            const itemsPerPage = 9;
+            let viewMode = 'grid';
+            let minPrice = 0;
+            let maxPrice = 10000;
+            let selectedFeatures = [];
+
+            // DOM Elements
+            const sortSelect = document.getElementById('sort-select');
+            const minPriceInput = document.getElementById('min-price');
+            const maxPriceInput = document.getElementById('max-price');
+            const priceSlider = document.getElementById('price-slider');
+            const applyPriceFilterBtn = document.getElementById('apply-price-filter');
+            const gridViewBtn = document.getElementById('grid-view');
+            const listViewBtn = document.getElementById('list-view');
+            const pagination = document.getElementById('pagination');
+
+            // Initialize
+            initializeCompanyInfo();
+            initializeNavigation();
+            init();
+
+            // Initialize Company Information
+            function initializeCompanyInfo() {
+                const companyInfo = NxtOasisDatabase.companyInfo;
+                document.getElementById('sales-email').innerHTML = `<a href="mailto:${companyInfo.emails.sales}" class="text-white">${companyInfo.emails.sales}</a>`;
+                document.getElementById('whatsapp-number').textContent = companyInfo.phones.india;
+                document.getElementById('company-short-description').textContent = companyInfo.about.shortDescription;
+                
+                const socialLinks = [
+                    { id: 'facebook-link', url: companyInfo.socialMedia.facebook },
+                    { id: 'instagram-link', url: companyInfo.socialMedia.instagram },
+                    { id: 'youtube-link', url: companyInfo.socialMedia.youtube },
+                    { id: 'footer-facebook', url: companyInfo.socialMedia.facebook },
+                    { id: 'footer-instagram', url: companyInfo.socialMedia.instagram },
+                    { id: 'footer-youtube', url: companyInfo.socialMedia.youtube },
+                    { id: 'topbar-facebook', url: companyInfo.socialMedia.facebook },
+                    { id: 'topbar-youtube', url: companyInfo.socialMedia.youtube },
+                    { id: 'topbar-instagram', url: companyInfo.socialMedia.instagram }
+                ];
+                
+                socialLinks.forEach(link => {
+                    document.getElementById(link.id).href = link.url;
+                });
+            }
+
+            // Initialize Navigation
+            function initializeNavigation() {
+                const dropdown = document.getElementById('product-dropdown-menu');
+                const footerCategories = document.getElementById('footer-categories');
+                const categories = getAllCategories();
+                
+                dropdown.innerHTML = '';
+                footerCategories.innerHTML = '';
+                
+                categories.forEach(category => {
+                    if (category.id !== 'new') {
+                        dropdown.innerHTML += `<li><a class="dropdown-item" href="products.html?category=${category.id}">${category.name}</a></li>`;
+                        footerCategories.innerHTML += `<li><a href="products.html?category=${category.id}">${category.name}</a></li>`;
+                    }
+                });
+            }
+
+            // Initialize Page
+            function init() {
+                loadCategories();
+                loadFeatures();
+                loadProducts();
+                updateCategoryInfo();
+                
+                const prices = getAllProducts().map(product => product.price);
+                minPrice = Math.floor(Math.min(...prices));
+                maxPrice = Math.ceil(Math.max(...prices));
+                
+                minPriceInput.value = minPrice;
+                maxPriceInput.value = maxPrice;
+                minPriceInput.min = minPrice;
+                maxPriceInput.max = maxPrice;
+                
+                priceSlider.min = minPrice;
+                priceSlider.max = maxPrice;
+                priceSlider.value = maxPrice;
+                
+                sortSelect.value = currentSort;
+                addEventListeners();
+            }
+
+            // Load Categories
+            function loadCategories() {
+                const categoriesList = document.getElementById('categories-list');
+                categoriesList.innerHTML = `
+                    <li class="category-item">
+                        <a href="products.html" class="category-link ${currentCategory === 'all' ? 'active' : ''}">
+                            <span>All Products</span>
+                            <span class="category-count">${getAllProducts().length}</span>
+                        </a>
+                    </li>
+                `;
+                
+                getAllCategories().forEach(category => {
+                    categoriesList.innerHTML += `
+                        <li class="category-item">
+                            <a href="products.html?category=${category.id}" class="category-link ${currentCategory === category.id ? 'active' : ''}">
+                                <span>${category.name}</span>
+                                <span class="category-count">${category.count}</span>
+                            </a>
+                        </li>
+                    `;
+                });
+            }
+
+            // Load Features
+            function loadFeatures() {
+                const featureList = document.getElementById('feature-list');
+                featureList.innerHTML = '';
+                
+                const uniqueFeatures = new Set();
+                getAllProducts().forEach(product => {
+                    if (product.keyFeature) {
+                        product.keyFeature.split(',').map(feature => feature.trim()).filter(feature => feature).forEach(feature => uniqueFeatures.add(feature));
+                    }
+                });
+                
+                Array.from(uniqueFeatures).sort().forEach(feature => {
+                    featureList.innerHTML += `
+                        <li class="feature-item">
+                            <label>
+                                <input type="checkbox" class="feature-checkbox" value="${feature}" ${selectedFeatures.includes(feature) ? 'checked' : ''}>
+                                ${feature}
+                            </label>
+                        </li>
+                    `;
+                });
+            }
+
+            // Get Filtered Products
+            function getFilteredProducts() {
+                let filteredProducts = [];
+                
+                if (currentCategory === 'all') {
+                    filteredProducts = getAllProducts();
+                } else if (currentCategory === 'new') {
+                    filteredProducts = getNewReleases();
+                } else {
+                    filteredProducts = getProductsByCategory(currentCategory);
+                }
+                
+                if (minPrice > 0 || maxPrice < Infinity) {
+                    filteredProducts = filterProductsByPrice(filteredProducts, minPrice, maxPrice);
+                }
+                
+                if (selectedFeatures.length > 0) {
+                    filteredProducts = filteredProducts.filter(product => 
+                        selectedFeatures.some(feature => 
+                            product.keyFeature && product.keyFeature.toLowerCase().includes(feature.toLowerCase())
+                        )
+                    );
+                }
+                
+                return filteredProducts;
+            }
+
+            // Load Products
+            function loadProducts() {
+                let filteredProducts = getFilteredProducts();
+                filteredProducts = sortProducts(filteredProducts, currentSort);
+                
+                document.getElementById('products-total').textContent = filteredProducts.length;
+                
+                const paginatedProducts = paginateProducts(filteredProducts, currentPage, itemsPerPage);
+                
+                const startIndex = (currentPage - 1) * itemsPerPage + 1;
+                const endIndex = Math.min(startIndex + paginatedProducts.length - 1, filteredProducts.length);
+                document.getElementById('products-showing').textContent = `${startIndex}-${endIndex}`;
+                
+                const productsContainer = document.getElementById('products-container');
+                productsContainer.innerHTML = '';
+                
+                if (paginatedProducts.length === 0) {
+                    productsContainer.innerHTML = `
+                        <div class="col-12">
+                            <div class="alert alert-info">No products found. Please try different filters.</div>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                if (viewMode === 'grid') {
+                    renderGridView(paginatedProducts);
+                } else {
+                    renderListView(paginatedProducts);
+                }
+                
+                generatePagination(filteredProducts.length);
+            }
+
+            // Render Grid View
+            function renderGridView(products) {
+                const productsContainer = document.getElementById('products-container');
+                productsContainer.className = 'row';
+                
+                products.forEach(product => {
+                    const category = getCategoryById(product.category);
+                    productsContainer.innerHTML += `
+                        <div class="col-md-4 mb-4">
+                            <div class="product-card">
+                                ${product.isNew ? '<span class="product-badge">NEW</span>' : ''}
+                                <a href="product-details.html?id=${product.id}">
+                                    <img src="${product.image}" alt="${product.name}" class="product-img">
+                                </a>
+                                <h3 class="product-title">
+                                    <a href="product-details.html?id=${product.id}" class="text-dark text-decoration-none">${product.name}</a>
+                                </h3>
+                                <div class="product-meta">
+                                    <div class="product-category">${category?.name || 'Unknown'}</div>
+                                    <div class="product-feature"><strong>Key Feature:</strong> ${product.keyFeature}</div>
+                                </div>
+                                <div class="product-price">₹${formatPrice(product.price)}</div>
+                                <div class="product-actions">
+                                    <a href="product-details.html?id=${product.id}" class="btn-view">View Details</a>
+                                    <button class="btn-wishlist" data-product-id="${product.id}"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Render List View
+            function renderListView(products) {
+                const productsContainer = document.getElementById('products-container');
+                productsContainer.className = '';
+                
+                products.forEach(product => {
+                    const category = getCategoryById(product.category);
+                    productsContainer.innerHTML += `
+                        <div class="product-list-item">
+                            ${product.isNew ? '<span class="product-badge">NEW</span>' : ''}
+                            <div class="product-list-img-container">
+                                <a href="product-details.html?id=${product.id}">
+                                    <img src="${product.image}" alt="${product.name}" class="product-list-img">
+                                </a>
+                            </div>
+                            <div class="product-list-content">
+                                <h3 class="product-list-title">
+                                    <a href="product-details.html?id=${product.id}" class="text-dark text-decoration-none">${product.name}</a>
+                                </h3>
+                                <div class="product-list-category">${category?.name || 'Unknown'}</div>
+                                <div class="product-list-description">${product.description}</div>
+                                <div class="product-list-meta">
+                                    <div class="product-list-feature">
+                                        <i class="fas fa-palette"></i> ${product.color}
+                                    </div>
+                                    <div class="product-list-feature">
+                                        <i class="fas fa-box"></i> ${product.capacity}
+                                    </div>
+                                    ${product.laptop ? `
+                                    <div class="product-list-feature">
+                                        <i class="fas fa-laptop"></i> ${product.laptop}
+                                    </div>
+                                    ` : ''}
+                                    <div class="product-list-feature">
+                                        <i class="fas fa-star"></i> ${product.keyFeature}
+                                    </div>
+                                </div>
+                                <div class="product-list-price">₹${formatPrice(product.price)}</div>
+                                <div class="product-list-actions">
+                                    <a href="product-details.html?id=${product.id}" class="btn-view">View Details</a>
+                                    <button class="btn-wishlist" data-product-id="${product.id}"><i class="far fa-heart"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            // Generate Pagination
+            function generatePagination(totalProducts) {
+                const totalPages = Math.ceil(totalProducts / itemsPerPage);
+                const pagination = document.getElementById('pagination');
+                pagination.innerHTML = '';
+                
+                if (totalPages <= 1) return;
+                
+                pagination.innerHTML += `
+                    <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${currentPage - 1}" aria-label="Previous">
+                            <span aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
+                        </a>
+                    </li>
+                `;
+                
+                for (let i = 1; i <= totalPages; i++) {
+                    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                        pagination.innerHTML += `
+                            <li class="page-item ${currentPage === i ? 'active' : ''}">
+                                <a class="page-link" href="#" data-page="${i}">${i}</a>
+                            </li>
+                        `;
+                    } else if (i === currentPage - 2 || i === currentPage + 2) {
+                        pagination.innerHTML += `
+                            <li class="page-item disabled">
+                                <span class="page-link">...</span>
+                            </li>
+                        `;
+                    }
+                }
+                
+                pagination.innerHTML += `
+                    <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                        <a class="page-link" href="#" data-page="${currentPage + 1}" aria-label="Next">
+                            <span aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
+                        </a>
+                    </li>
+                `;
+            }
+
+            // Update Category Information
+            function updateCategoryInfo() {
+                const categoryTitle = document.getElementById('category-title');
+                const breadcrumbCategory = document.getElementById('breadcrumb-category');
+                const categoryBanner = document.getElementById('category-banner');
+                
+                if (currentCategory === 'all') {
+                    categoryTitle.textContent = 'All Products';
+                    breadcrumbCategory.textContent = 'All Products';
+                    categoryBanner.style.backgroundImage = `url('./imgs/new-release.jpeg')`;
+                } else {
+                    const category = getCategoryById(currentCategory);
+                    if (category) {
+                        categoryTitle.textContent = category.name;
+                        breadcrumbCategory.textContent = category.name;
+                        categoryBanner.style.backgroundImage = `url('${category.image || './imgs/businessBags.jpg'}')`;
+                    }
+                }
+            }
+
+            // Update URL
+            function updateURL() {
+                const url = new URL(window.location.href);
+                
+                if (currentCategory !== 'all') {
+                    url.searchParams.set('category', currentCategory);
+                } else {
+                    url.searchParams.delete('category');
+                }
+                
+                if (currentPage > 1) {
+                    url.searchParams.set('page', currentPage);
+                } else {
+                    url.searchParams.delete('page');
+                }
+                
+                if (currentSort !== 'featured') {
+                    url.searchParams.set('sort', currentSort);
+                } else {
+                    url.searchParams.delete('sort');
+                }
+                
+                window.history.pushState({}, '', url);
+            }
+
+            // Add Event Listeners
+            function addEventListeners() {
+                sortSelect.addEventListener('change', function() {
+                    currentSort = this.value;
+                    currentPage = 1;
+                    loadProducts();
+                    updateURL();
+                });
+                
+                gridViewBtn.addEventListener('click', function() {
+                    if (viewMode !== 'grid') {
+                        viewMode = 'grid';
+                        gridViewBtn.classList.add('active');
+                        listViewBtn.classList.remove('active');
+                        loadProducts();
+                    }
+                });
+                
+                listViewBtn.addEventListener('click', function() {
+                    if (viewMode !== 'list') {
+                        viewMode = 'list';
+                        listViewBtn.classList.add('active');
+                        gridViewBtn.classList.remove('active');
+                        loadProducts();
+                    }
+                });
+                
+                pagination.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageLink = e.target.closest('.page-link');
+                    if (pageLink && !pageLink.parentElement.classList.contains('disabled')) {
+                        currentPage = parseInt(pageLink.getAttribute('data-page'));
+                        loadProducts();
+                        updateURL();
+                        window.scrollTo({
+                            top: document.getElementById('products-container').offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+                
+                applyPriceFilterBtn.addEventListener('click', function() {
+                    minPrice = parseInt(minPriceInput.value) || 0;
+                    maxPrice = parseInt(maxPriceInput.value) || 10000;
+                    currentPage = 1;
+                    loadProducts();
+                });
+                
+                priceSlider.addEventListener('input', function() {
+                    maxPriceInput.value = this.value;
+                });
+                
+                minPriceInput.addEventListener('change', function() {
+                    if (parseInt(this.value) > parseInt(maxPriceInput.value)) {
+                        this.value = maxPriceInput.value;
+                    }
+                });
+                
+                maxPriceInput.addEventListener('change', function() {
+                    if (parseInt(this.value) < parseInt(minPriceInput.value)) {
+                        this.value = minPriceInput.value;
+                    }
+                    priceSlider.value = this.value;
+                });
+                
+                document.getElementById('feature-list').addEventListener('change', function(e) {
+                    if (e.target.classList.contains('feature-checkbox')) {
+                        const feature = e.target.value;
+                        if (e.target.checked) {
+                            selectedFeatures.push(feature);
+                        } else {
+                            selectedFeatures = selectedFeatures.filter(f => f !== feature);
+                        }
+                        currentPage = 1;
+                        loadProducts();
+                    }
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (e.target.closest('.btn-wishlist')) {
+                        const wishlistBtn = e.target.closest('.btn-wishlist');
+                        wishlistBtn.classList.toggle('active');
+                        wishlistBtn.innerHTML = wishlistBtn.classList.contains('active') 
+                            ? '<i class="fas fa-heart"></i>' 
+                            : '<i class="far fa-heart"></i>';
+                        wishlistBtn.style.backgroundColor = wishlistBtn.classList.contains('active') 
+                            ? '#e0f0ff' 
+                            : '#f0f0f0';
+                        wishlistBtn.style.color = wishlistBtn.classList.contains('active') 
+                            ? '#004dc1' 
+                            : '#666';
+                    }
+                });
+            }
+
+            // Utility Functions
+            function getAllProducts() {
+                return NxtOasisDatabase.products;
+            }
+        });
+    </script>
+</body>
+</html>
